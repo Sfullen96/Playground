@@ -1,4 +1,6 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions,consistent-return */
+/* @flow */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /*
 * SearchPreviewItem - Renders a single results
@@ -7,7 +9,20 @@
 import React from 'react';
 import Aux from '../../hoc/Auxiliary';
 
-const SearchPreviewItem = (props) => {
+type Props = {
+    searchPreviewItem: {
+        country: string,
+        bookingId: number,
+        city: string,
+        iata: ?string,
+        name: string,
+        placeType: ?string,
+        region: ?string,
+    },
+    onClick: Function,
+};
+
+const SearchPreviewItem = (props: Props) => {
     const { searchPreviewItem, onClick } = props;
     let placeType = '';
     let placeTypeIcon = '';
@@ -42,7 +57,6 @@ const SearchPreviewItem = (props) => {
         }
     }
 
-    console.log('searchPreviewItem', searchPreviewItem);
     if (searchPreviewItem) {
         return (
             <Aux>
@@ -52,7 +66,7 @@ const SearchPreviewItem = (props) => {
                             <div className="row d-flex align-items-center h-100">
                                 <div className="col-1 col-sm-2">
                                     <span
-                                        className={`tag tag-${searchPreviewItem && searchPreviewItem.placeType && searchPreviewItem.placeType} align-center d-none d-sm-block`}
+                                        className={`tag tag-${searchPreviewItem.placeType} align-center d-none d-sm-block`}
                                     >
                                         {placeType}
                                     </span>

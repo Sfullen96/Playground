@@ -12,6 +12,7 @@ module.exports = {
         "linebreak-style": ["off", "windows"],
         // "linebreak-style": ["error", "unix"],
         "react/jsx-one-expression-per-line": "off",
+        "react/no-unused-prop-types": "off",
     },
     settings: {
         "jsx": true,

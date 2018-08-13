@@ -17,6 +17,7 @@
     "dotenv-expand": "4.2.0",
     "enzyme": "^3.4.0",
     "enzyme-adapter-react-16": "^1.2.0",
+    "eslint-config-airbnb-flow": "^1.0.2",
     "eslint-config-react-app": "^2.1.0",
     "eslint-loader": "1.9.0",
     "eslint-plugin-flow": "^2.29.1",
@@ -99,7 +100,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.1.0",
+    "babel-eslint": "^8.2.6",
     "babel-preset-flow": "^6.23.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.0.0",

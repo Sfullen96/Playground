@@ -1,5 +1,6 @@
-/* eslint-disable jsx-a11y/label-has-for */
-/*
+/* @flow
+* eslint-disable jsx-a11y/label-has-for
+*
 * PickupLocationForm component
 * Renders the form where a user can
 * search for a pickup location.
@@ -10,15 +11,33 @@ import { DebounceInput } from 'react-debounce-input';
 import SearchPreview from '../../components/SearchPreview/SearchPreview';
 import './PickupLocationForm.scss';
 
-class PickupLocationForm extends Component {
+type State = {
+    showSearchPreview: boolean,
+    submissionError: ?string,
+    submissionSuccess: ?string,
+    searchResults: Array<{
+        country: string,
+        bookingId: number,
+        city: string,
+        iata: ?string,
+        name: string,
+        placeType: ?string,
+        region: ?string,
+    }>,
+    isFetching: boolean,
+    value: string,
+    previewHover: boolean,
+};
+
+class PickupLocationForm extends Component<void, State> {
     constructor() {
         super();
 
         this.state = {
             showSearchPreview: false,
-            submissionError: '',
-            submissionSuccess: false,
-            searchResults: null,
+            submissionError: null,
+            submissionSuccess: null,
+            searchResults: [],
             isFetching: false,
             value: '',
             previewHover: false,
@@ -49,7 +68,7 @@ class PickupLocationForm extends Component {
     *
     * @param {Event} e - The triggered event
     * */
-    onFocus = (e) => {
+    onFocus = (e: SyntheticInputEvent<HTMLFormElement>) => {
         // If the length of the inputted string is greater than 2 characters
         if (e.target.value.length > 2) {
             // Show the results again
@@ -97,13 +116,13 @@ class PickupLocationForm extends Component {
     *
     * @param {Event} e
     * */
-    handleSearch = (e) => {
+    handleSearch = (e: SyntheticEvent<HTMLFormElement>) => {
         const { value } = this.state;
 
         e.preventDefault();
 
         // If nothing entered in the input
-        if (!value.length) {
+        if (value && !value.length) {
             this.setState({
                 submissionError: 'Please enter a pickup location',
             });
@@ -121,7 +140,7 @@ class PickupLocationForm extends Component {
     *
     * @param {Event} e
     * */
-    handleChange = (e) => {
+    handleChange = (e: SyntheticInputEvent<HTMLFormElement>) => {
         // Keep the controlled input's value consistent in state
         this.setState({
             value: e.target.value,
@@ -172,7 +191,7 @@ class PickupLocationForm extends Component {
     *
     * @param {Object} item - the search result item
     * */
-    handleSearchResultClick = (item) => {
+    handleSearchResultClick = (item: Object) => {
         // create the string to be displayed
         const string = `${item.name}${('iata' in item) ? ` (${item.iata})` : ''}, ${('city' in item) ? `${item.city},` : `${item.region},`} ${item.country}`;
 
