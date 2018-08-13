@@ -1,6 +1,6 @@
-/* @flow
-* eslint-disable jsx-a11y/label-has-for
-*
+/* @flow */
+/* eslint-disable jsx-a11y/label-has-for */
+/*
 * PickupLocationForm component
 * Renders the form where a user can
 * search for a pickup location.

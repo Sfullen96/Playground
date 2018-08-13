@@ -58,6 +58,14 @@ const SearchPreviewItem = (props: Props) => {
     }
 
     if (searchPreviewItem) {
+        // Make sure iata & region are always strings, to keep flow happy
+        const iata = (
+            ('iata' in searchPreviewItem)
+            && searchPreviewItem.iata !== null
+            && searchPreviewItem.iata !== undefined)
+            ? `(${searchPreviewItem.iata})`
+            : '';
+        const region = searchPreviewItem.region ? searchPreviewItem.region : '';
         return (
             <Aux>
                 {
@@ -66,7 +74,7 @@ const SearchPreviewItem = (props: Props) => {
                             <div className="row d-flex align-items-center h-100">
                                 <div className="col-1 col-sm-2">
                                     <span
-                                        className={`tag tag-${searchPreviewItem.placeType} align-center d-none d-sm-block`}
+                                        className={`tag tag-${placeType} align-center d-none d-sm-block`}
                                     >
                                         {placeType}
                                     </span>
@@ -78,13 +86,13 @@ const SearchPreviewItem = (props: Props) => {
                                 </div>
                                 <div className="col-10">
                                     <span className="item-info">
-                                        {`${searchPreviewItem && searchPreviewItem.name && searchPreviewItem.name} ${('iata' in searchPreviewItem) ? `(${searchPreviewItem.iata})` : ''}`}
+                                        {`${searchPreviewItem.name} ${iata}`}
                                     </span>
                                     <span className="item-info">
                                         {
                                             ('city' in searchPreviewItem)
                                                 ? `${searchPreviewItem.city}, `
-                                                : `${searchPreviewItem.region}, `
+                                                : `${region}, `
                                         }
                                         {`${searchPreviewItem.country}`}
                                     </span>
